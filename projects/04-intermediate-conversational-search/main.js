@@ -23,7 +23,7 @@ const inspector = createMcpInspector({
   persistent: true,
   onReset: () => { history.length = 0; chat.replaceChildren(); historyCount.textContent = "대화 0턴"; errorTarget.hidden = true; form.reset(); }
 });
-const harness = createHarnessController({ anchor:form, project:"search", required:["query"], allowedTools:["search_knowledge"] });
+const harness = createHarnessController({ anchor:form, project:"search", required:["query"], allowedTools:["search_knowledge"], contractLabel:"답변 + 근거 문서" });
 mountOssExtension("search");
 
 if (form) form.addEventListener("submit", async (event) => {

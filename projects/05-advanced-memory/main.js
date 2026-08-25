@@ -25,7 +25,7 @@ const inspector = createMcpInspector({
   persistent: true,
   onReset: () => { session = null; form.reset(); result.hidden = true; result.classList.remove("is-error"); }
 });
-const harness = createHarnessController({ anchor:form, project:"memory", required:["subject","events"], allowedTools:["remember_events+recall_memory+inspect_timeline"] });
+const harness = createHarnessController({ anchor:form, project:"memory", required:["subject","events"], allowedTools:["remember_events+recall_memory+inspect_timeline"], contractLabel:"최신값 + 시각 + 출처" });
 mountOssExtension("memory");
 
 if (form) form.addEventListener("submit", async (event) => {

@@ -18,7 +18,7 @@ const inspector = createMcpInspector({
   anchor: form,
   onReset: () => { form.reset(); result.hidden = true; result.classList.remove("is-error"); }
 });
-const harness = createHarnessController({ anchor:form, project:"meeting", required:["transcript"], allowedTools:["create_meeting_notes"] });
+const harness = createHarnessController({ anchor:form, project:"meeting", required:["transcript"], allowedTools:["create_meeting_notes"], contractLabel:"담당자·업무·마감일 완전성" });
 
 if (form) form.addEventListener("submit", async (event) => {
   event.preventDefault();

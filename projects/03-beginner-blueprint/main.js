@@ -18,7 +18,7 @@ const inspector = createMcpInspector({
   anchor: form,
   onReset: () => { form.reset(); result.hidden = true; result.classList.remove("is-error"); }
 });
-const harness = createHarnessController({ anchor:form, project:"blueprint", required:["width","height","purpose"], allowedTools:["generate_floor_plan"] });
+const harness = createHarnessController({ anchor:form, project:"blueprint", required:["width","height","purpose"], allowedTools:["generate_floor_plan"], contractLabel:"면적 계산 + SVG 산출물" });
 mountOssExtension("blueprint");
 
 if (form) form.addEventListener("submit", async (event) => {

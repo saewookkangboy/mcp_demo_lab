@@ -28,6 +28,15 @@ test("비교 관점: 전체 시연 Harness 토글이 개별 데모에 전달된�
   assert.match(studio, /Harness 미적용/);
 });
 
+test("Harness Engineering 관점: 최종 전달 결정값이 적용 전후로 구분된다", async () => {
+  const [controller, harness] = await Promise.all([read("shared/ui/harness-controller.js"), read("shared/harness/execution-harness.js")]);
+  assert.match(controller, /최종 전달값/);
+  assert.match(controller, /계약 위반 결과 비교/);
+  assert.match(harness, /decision:"PASS_THROUGH"/);
+  assert.match(harness, /decision:"ALLOW"/);
+  assert.match(harness, /decision:"BLOCK"/);
+});
+
 test("외부 MCP 관점: 설치 명령 대신 화면 연결 시연을 제공한다", async () => {
   const extension = await read("shared/ui/oss-extension.js");
   assert.match(extension, /화면 연결 시연/);

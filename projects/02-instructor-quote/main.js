@@ -18,7 +18,7 @@ const inspector = createMcpInspector({
   anchor: form,
   onReset: () => { form.reset(); result.hidden = true; result.classList.remove("is-error"); }
 });
-const harness = createHarnessController({ anchor:form, project:"quote", required:["service","quantity"], allowedTools:["calculate_quote"] });
+const harness = createHarnessController({ anchor:form, project:"quote", required:["service","quantity"], allowedTools:["calculate_quote"], contractLabel:"공급가 + 부가세 = 합계" });
 mountOssExtension("quote");
 
 if (form) form.addEventListener("submit", async (event) => {
