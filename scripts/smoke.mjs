@@ -13,7 +13,10 @@ await access(join(root,"shared/harness/execution-harness.js"));
 await access(join(root,"shared/server/official-docs-mcp.mjs"));
 await access(join(root,"mcp.config.example.json"));
 await access(join(root,"docs/HARNESS_COMPARISON_GUIDE.md"));
+await access(join(root,"docs/NEXT_STAGE_CUSTOM_MISSIONS.md"));
 await access(join(root,"presentation.html"));
+await access(join(root,"next-stage.html"));
+await access(join(root,"shared/ui/next-stage.js"));
 for (const project of projects) {
   for (const file of ["README.md","index.html","main.js","src/server.js","tests/app.test.js"]) await access(join(root,"projects",project.name,file));
 }

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Next Stage | MCP Demo Lab</title>
+  <link rel="stylesheet" href="/shared/ui/styles.css">
+</head>
+<body class="next-stage-page">
+  <main class="next-stage-main">
+    <nav class="next-stage-nav" aria-label="Next Stage 이동">
+      <a href="/">MCP Demo Lab</a>
+      <span>기본 실습 완료 후</span>
+      <strong>Next Stage</strong>
+    </nav>
+
+    <header class="next-stage-hero">
+      <div>
+        <p class="eyebrow">CUSTOM DEVELOPMENT MISSIONS</p>
+        <h1>이제 직접 MCP 데모를<br>확장해보세요</h1>
+        <p class="lead">기존 프로젝트의 구조를 유지한 채 테스트를 먼저 추가하고, 도구 로직·FE·Harness 계약을 함께 확장하는 3개의 미션입니다.</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#missions">미션 선택</a>
+          <a class="secondary-action" href="/docs/NEXT_STAGE_CUSTOM_MISSIONS.md">상세 가이드 열기</a>
+        </div>
+      </div>
+      <aside class="next-stage-definition" aria-label="공통 개발 과정">
+        <span>모든 미션의 공통 과정</span>
+        <ol>
+          <li><strong>RED</strong> 실패 테스트 먼저 작성</li>
+          <li><strong>BUILD</strong> MCP 도구 계약과 로직 확장</li>
+          <li><strong>SHOW</strong> FE 결과 화면에 연결</li>
+          <li><strong>GUARD</strong> Harness 계약 추가</li>
+          <li><strong>VERIFY</strong> 정상·경계·오류 검증</li>
+        </ol>
+      </aside>
+    </header>
+
+    <section class="next-process" aria-labelledby="process-title">
+      <div class="section-heading">
+        <div><span class="next-label">동일한 프로세스</span><h2 id="process-title">7단계 완주 흐름</h2></div>
+        <p>기존 데모와 같은 관찰·비교·검증 방식으로 진행합니다.</p>
+      </div>
+      <ol class="process-rail">
+        <li><span>01</span><strong>미션 선택</strong><small>기준 데모 열기</small></li>
+        <li><span>02</span><strong>테스트 작성</strong><small>먼저 실패 확인</small></li>
+        <li><span>03</span><strong>도구 확장</strong><small>입출력 계약 유지</small></li>
+        <li><span>04</span><strong>FE 연결</strong><small>결과를 화면에 표시</small></li>
+        <li><span>05</span><strong>Harness</strong><small>ALLOW·BLOCK 확인</small></li>
+        <li><span>06</span><strong>전체 검증</strong><small>기준 32개도 보호</small></li>
+        <li><span>07</span><strong>제출</strong><small>Diff·화면·테스트</small></li>
+      </ol>
+    </section>
+
+    <section id="missions" class="mission-section" aria-labelledby="missions-title">
+      <div class="section-heading">
+        <div><span class="next-label">3 CUSTOM MISSIONS</span><h2 id="missions-title">난이도별 미션</h2></div>
+        <p>한 가지를 선택해 완성하거나 팀별로 나누어 수행합니다.</p>
+      </div>
+      <div id="mission-grid" class="mission-grid"></div>
+    </section>
+
+    <section class="next-finish" aria-labelledby="finish-title">
+      <div>
+        <span class="next-label">완료 기준</span>
+        <h2 id="finish-title">결과보다 재현 가능한 과정이 중요합니다</h2>
+        <p>정상 입력만 동작하는 것으로 끝내지 않고, 경계값 차단과 Harness 증거, 기존 테스트 보호까지 확인합니다.</p>
+      </div>
+      <ul>
+        <li>새 학습자 테스트 3개 이상</li>
+        <li>FE에서 새 결과 확인</li>
+        <li>Harness 미적용·적용 비교</li>
+        <li>계약 위반 BLOCK 확인</li>
+        <li>전체 검증 통과</li>
+        <li>Diff·화면·테스트 결과 제출</li>
+      </ul>
+    </section>
+  </main>
+  <div class="copy-toast" id="copy-toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/shared/ui/next-stage.js"></script>
+</body>
+</html>

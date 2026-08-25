@@ -10,6 +10,8 @@ const loading = document.querySelector("#stage-loading");
 const nav = document.querySelector("#demo-nav");
 const harness = document.querySelector("#global-harness");
 const status = document.querySelector("#studio-status");
+const nextButton = document.querySelector("#next-demo");
+const nextStage = document.querySelector("#next-stage");
 let current = 0;
 let harnessEnabled = true;
 nav.innerHTML = demos.map((demo,index) => `<button type="button" data-index="${index}"><span>${String(index+1).padStart(2,"0")}</span><span><strong>${demo.title}</strong><small>${demo.level}</small></span></button>`).join("");
@@ -26,7 +28,8 @@ function render(index) {
   document.querySelector("#note-list").innerHTML = demo.steps.map((step) => `<li>${step}</li>`).join("");
   [...nav.querySelectorAll("button")].forEach((button,buttonIndex) => { button.classList.toggle("is-active", buttonIndex === current); button.setAttribute("aria-current", buttonIndex === current ? "page" : "false"); });
   document.querySelector("#previous-demo").disabled = current === 0;
-  document.querySelector("#next-demo").disabled = current === demos.length - 1;
+  nextButton.hidden = current === demos.length - 1;
+  nextStage.hidden = current !== demos.length - 1;
   status.textContent = `${demo.title} 화면을 준비하고 있습니다.`;
 }
 frame.addEventListener("load", () => { loading.hidden = true; frame.classList.add("is-ready"); send({ type:"mcp-demo:harness", enabled:harnessEnabled }); status.textContent = `${demos[current].title} 준비 완료. 기본 입력을 실행하세요.`; });
@@ -40,7 +43,7 @@ harness.addEventListener("click", () => {
   status.textContent = `현재 데모에 Harness ${harnessEnabled ? "적용" : "미적용"} 설정을 전달했습니다.`;
 });
 document.querySelector("#previous-demo").addEventListener("click", () => render(current - 1));
-document.querySelector("#next-demo").addEventListener("click", () => render(current + 1));
+nextButton.addEventListener("click", () => render(current + 1));
 document.querySelector("#run-demo").addEventListener("click", () => { send({ type:"mcp-demo:run" }); status.textContent = "기본 입력으로 MCP 도구를 실행하고 있습니다."; });
 document.querySelector("#verify-demo").addEventListener("click", () => { send({ type:"mcp-demo:run-screen-check" }); status.textContent = "현재 화면의 MCP 단계와 결과를 검증하고 있습니다."; });
 window.addEventListener("message", (event) => {

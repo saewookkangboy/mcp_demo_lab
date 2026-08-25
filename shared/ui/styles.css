@@ -226,6 +226,57 @@ pre { overflow:auto; background:#111827; color:#dbeafe; border-radius:12px; padd
 .primary-control { background:#234bd7; color:#fff; }
 .secondary-control { border:1px solid #cbd5e1; background:#fff; color:#334155; }
 .secondary-control:disabled { opacity:.4; cursor:not-allowed; }
+.next-stage-shortcut { display:inline-flex; align-items:center; justify-content:center; min-height:42px; border-radius:11px; padding:0 15px; background:#6d28d9; color:#fff; font-weight:850; text-decoration:none; white-space:nowrap; }
+.next-stage-shortcut[hidden] { display:none; }
+
+/* Next Stage custom development */
+.home-next-stage { display:flex; align-items:center; justify-content:space-between; gap:28px; margin-top:48px; border-radius:24px; padding:30px; background:#172554; color:#dbeafe; }
+.home-next-stage h2 { margin:8px 0; }
+.home-next-stage p { margin:0; color:#bfdbfe; }
+.home-next-stage .primary-action { flex:0 0 auto; background:#fff; color:#1e3a8a; }
+.next-stage-page { background:linear-gradient(145deg,#eef2ff,#faf5ff 48%,#ecfeff); }
+.next-stage-main { width:min(1180px,calc(100% - 40px)); margin:0 auto; padding:24px 0 80px; }
+.next-stage-nav { display:flex; align-items:center; gap:9px; color:#64748b; font-size:.8rem; }
+.next-stage-nav a { color:#1e3a8a; font-weight:900; text-decoration:none; }
+.next-stage-nav span::before { content:"/"; margin-right:9px; color:#cbd5e1; }
+.next-stage-nav strong { color:#6d28d9; }
+.next-stage-hero { min-height:510px; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr); align-items:center; gap:68px; }
+.next-stage-definition { border-radius:24px; padding:28px; background:#17153b; color:#ede9fe; box-shadow:0 24px 70px rgba(49,46,129,.2); }
+.next-stage-definition>span,.next-label { color:#7c3aed; font-size:.73rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.next-stage-definition>span { color:#c4b5fd; }
+.next-stage-definition ol { display:grid; gap:13px; margin:20px 0 0; padding-left:1.5rem; color:#ddd6fe; }
+.next-stage-definition strong { margin-right:6px; color:#a7f3d0; font-size:.74rem; letter-spacing:.05em; }
+.next-process,.mission-section { padding:38px 0; }
+.next-process .section-heading>div h2,.mission-section .section-heading>div h2 { margin:6px 0 0; }
+.process-rail { display:grid; grid-template-columns:repeat(7,1fr); gap:9px; margin:24px 0 0; padding:0; list-style:none; }
+.process-rail li { min-width:0; border:1px solid #d8d4fe; border-radius:16px; padding:15px 13px; background:rgba(255,255,255,.82); }
+.process-rail span,.process-rail strong,.process-rail small { display:block; }
+.process-rail span { color:#7c3aed; font-size:.7rem; font-weight:900; }
+.process-rail strong { margin:16px 0 5px; color:#312e81; }
+.process-rail small { color:#64748b; line-height:1.35; }
+.mission-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.mission-card { display:flex; flex-direction:column; border:1px solid #ddd6fe; border-radius:24px; padding:23px; background:rgba(255,255,255,.92); box-shadow:0 16px 44px rgba(76,29,149,.08); }
+.mission-card>header { display:flex; align-items:center; justify-content:space-between; }
+.mission-number { color:#a78bfa; font-size:.76rem; font-weight:900; }
+.mission-level { border-radius:999px; padding:5px 9px; background:#ede9fe; color:#6d28d9; font-size:.72rem; font-weight:900; }
+.mission-source { margin:22px 0 7px; color:#7c3aed; font-size:.74rem; font-weight:850; }
+.mission-card h3 { margin:0; font-size:1.4rem; letter-spacing:-.035em; }
+.mission-goal { min-height:70px; color:#64748b; line-height:1.6; }
+.mission-card dl { display:grid; gap:1px; overflow:hidden; margin:10px 0; border:1px solid #e2e8f0; border-radius:14px; background:#e2e8f0; }
+.mission-card dl>div { display:grid; grid-template-columns:82px 1fr; gap:8px; padding:10px 11px; background:#f8fafc; }
+.mission-card dt { color:#64748b; font-size:.72rem; }
+.mission-card dd { min-width:0; margin:0; overflow-wrap:anywhere; color:#334155; font-size:.78rem; font-weight:750; }
+.mission-card details { margin:12px 0 18px; }
+.mission-card summary { cursor:pointer; color:#5b21b6; font-weight:850; }
+.mission-card details ol { color:#475569; font-size:.85rem; }
+.mission-actions { display:grid; grid-template-columns:1fr auto; align-items:center; gap:9px; margin-top:auto; }
+.mission-actions button { margin:0; border-radius:11px; background:#6d28d9; }
+.mission-actions a { color:#5b21b6; font-size:.8rem; font-weight:850; text-decoration:none; }
+.next-finish { display:grid; grid-template-columns:1.2fr .8fr; gap:36px; margin-top:40px; border-radius:26px; padding:34px; background:#111827; color:#e5e7eb; }
+.next-finish h2 { margin:8px 0; }
+.next-finish p,.next-finish ul { color:#cbd5e1; line-height:1.7; }
+.copy-toast { position:fixed; right:20px; bottom:20px; max-width:420px; transform:translateY(120px); border-radius:13px; padding:13px 16px; background:#312e81; color:#fff; box-shadow:0 16px 40px rgba(49,46,129,.3); opacity:0; transition:180ms ease; }
+.copy-toast.is-visible { transform:translateY(0); opacity:1; }
 
 /* In-demo browser verification and connection simulation */
 .screen-check { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:22px; border-top:1px solid #334155; padding-top:18px; }
@@ -279,6 +330,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   .run-controls { grid-column:1/-1; grid-row:1; }
   .screen-check,.connection-demo { grid-template-columns:1fr; align-items:start; }
   .screen-check-button,.connection-button { width:100%; }
+  .home-next-stage { align-items:flex-start; flex-direction:column; }
+  .next-stage-main { width:min(100% - 28px,680px); }
+  .next-stage-hero { min-height:auto; grid-template-columns:1fr; gap:28px; padding:54px 0; }
+  .process-rail { grid-template-columns:1fr 1fr; }
+  .mission-grid,.next-finish { grid-template-columns:1fr; }
 }
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; }
