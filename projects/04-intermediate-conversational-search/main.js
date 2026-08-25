@@ -21,7 +21,6 @@ const errorTarget = document.querySelector("#search-error");
 const inspector = createMcpInspector({
   anchor: panel,
   persistent: true,
-  testCommand: "node --test projects/04-intermediate-conversational-search/tests/app.test.js",
   onReset: () => { history.length = 0; chat.replaceChildren(); historyCount.textContent = "대화 0턴"; errorTarget.hidden = true; form.reset(); }
 });
 const harness = createHarnessController({ anchor:form, project:"search", required:["query"], allowedTools:["search_knowledge"] });

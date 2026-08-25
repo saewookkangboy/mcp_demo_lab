@@ -23,7 +23,6 @@ let session = null;
 const inspector = createMcpInspector({
   anchor: form,
   persistent: true,
-  testCommand: "node --test projects/05-advanced-memory/tests/app.test.js",
   onReset: () => { session = null; form.reset(); result.hidden = true; result.classList.remove("is-error"); }
 });
 const harness = createHarnessController({ anchor:form, project:"memory", required:["subject","events"], allowedTools:["remember_events+recall_memory+inspect_timeline"] });

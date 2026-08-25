@@ -16,7 +16,6 @@ const form = document.querySelector("form");
 const result = document.querySelector("#result");
 const inspector = createMcpInspector({
   anchor: form,
-  testCommand: "node --test projects/02-instructor-quote/tests/app.test.js",
   onReset: () => { form.reset(); result.hidden = true; result.classList.remove("is-error"); }
 });
 const harness = createHarnessController({ anchor:form, project:"quote", required:["service","quantity"], allowedTools:["calculate_quote"] });

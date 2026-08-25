@@ -47,6 +47,10 @@ export function createHarnessController({ anchor, project, required, allowedTool
     toggle.querySelector("strong").textContent = enabled ? "Harness 적용" : "Harness 미적용";
   }
   toggle.addEventListener("click", () => setEnabled(!enabled));
+  window.addEventListener("message", (event) => {
+    if (event.origin !== window.location.origin) return;
+    if (event.data?.type === "mcp-demo:harness") setEnabled(Boolean(event.data.enabled));
+  });
   section.querySelector(".compare-reset").addEventListener("click", () => {
     for (const [mode,column] of Object.entries(columns)) {
       column.className = "compare-column is-empty";

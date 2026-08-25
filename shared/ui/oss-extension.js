@@ -2,28 +2,24 @@ const catalog = {
   meeting: {
     server:"Filesystem MCP", license:"MIT", mode:"로컬 stdio · 폴더 권한 제한",
     repo:"https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
-    command:"npx -y @modelcontextprotocol/server-filesystem ./samples/oss-inputs",
     wow:"수강생이 작성한 실제 transcript.md를 MCP가 읽고, 즉석에서 회의록 카드로 바꿉니다.",
     flow:"list_directory → read_text_file → create_meeting_notes"
   },
   quote: {
     server:"Git MCP", license:"Apache-2.0 / 기존 코드 MIT", mode:"로컬 stdio · 현재 저장소만",
     repo:"https://github.com/modelcontextprotocol/servers/tree/main/src/git",
-    command:"uvx mcp-server-git --repository .",
     wow:"가격표 변경 전후 commit을 비교해 견적이 왜 달라졌는지 근거와 함께 보여줍니다.",
     flow:"git_log → git_diff → calculate_quote"
   },
   blueprint: {
     server:"Playwright MCP", license:"Apache-2.0", mode:"로컬 브라우저 자동화",
     repo:"https://github.com/microsoft/playwright-mcp",
-    command:"npx -y @playwright/mcp@latest",
     wow:"생성한 SVG 설계도를 실제 브라우저로 열고 스크린샷·콘솔·접근성 구조를 자동 검수합니다.",
     flow:"browser_navigate → browser_snapshot → browser_take_screenshot"
   },
   search: {
     server:"Fetch MCP + 공식 Docs MCP", license:"Fetch: MIT", mode:"원격 Streamable HTTP 라이브 체험",
     repo:"https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
-    command:"uvx mcp-server-fetch",
     wow:"가상 문서가 아니라 공식 MCP 서버에 질문하고, 발견된 실제 도구와 문서 링크를 즉시 확인합니다.",
     flow:"initialize → tools/list → search_model_context_protocol",
     live:true
@@ -31,7 +27,6 @@ const catalog = {
   memory: {
     server:"Memory MCP", license:"Apache-2.0 / 기존 코드 MIT", mode:"로컬 stdio · 지식 그래프",
     repo:"https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
-    command:"npx -y @modelcontextprotocol/server-memory",
     wow:"프로젝트·담당자·상태를 entity/relation으로 저장하고 다음 세션에서 관계 그래프로 다시 불러옵니다.",
     flow:"create_entities → create_relations → search_nodes"
   }
@@ -72,13 +67,43 @@ export function mountOssExtension(project) {
       <article class="wow-card"><span class="mini-label">WOW MOMENT</span><h3>결과가 실제 외부 도구와 연결됩니다</h3><p>${item.wow}</p></article>
     </div>
     <div class="oss-flow"><strong>확장 흐름</strong><code>${item.flow}</code></div>
-    <details class="install-guide"><summary>설치·연결 명령 보기</summary><div><code>${escapeHtml(item.command)}</code><button type="button" data-copy="${escapeHtml(item.command)}">명령 복사</button><p>처음에는 읽기 전용·샘플 폴더처럼 최소 권한으로 연결하세요. 실제 고객 데이터와 토큰은 수업 저장소에 넣지 않습니다.</p></div></details>
+    <section class="connection-demo" aria-label="외부 MCP 화면 연결 시연">
+      <div><span class="mini-label">화면 연결 시연</span><strong>외부 MCP가 연결되는 과정을 확인하세요</strong><p>실제 고객 데이터나 쓰기 권한 없이 교육용 연결 단계를 재현합니다.</p></div>
+      <button type="button" class="connection-button">연결 과정 보기</button>
+      <ol class="connection-stages" hidden>
+        ${item.flow.split(" → ").map((stage,index) => `<li><span>${String(index+1).padStart(2,"0")}</span><strong>${escapeHtml(stage)}</strong><em>대기</em></li>`).join("")}
+      </ol>
+      <p class="connection-status" role="status">연결 시연 전</p>
+    </section>
     ${item.live ? `<div class="live-lab"><div><span class="live-badge">● LIVE · 공식 외부 MCP</span><h3>공식 MCP 문서 서버에 직접 질문하기</h3><p>고정된 공식 endpoint를 Streamable HTTP로 호출합니다. 인증과 쓰기 권한은 사용하지 않습니다.</p></div><form><input name="liveQuery" value="tools/list와 tools/call의 차이는 무엇인가요?" maxlength="200" aria-label="공식 MCP 문서 질문"><button>실제 MCP 호출</button></form><p class="live-status">연결 전</p><ol class="live-trace"></ol><div class="live-results"></div></div>` : ""}`;
   main.append(section);
 
-  section.querySelector("[data-copy]")?.addEventListener("click", async (event) => {
-    await navigator.clipboard?.writeText(event.currentTarget.dataset.copy);
-    event.currentTarget.textContent = "복사됨";
+  section.querySelector(".connection-button")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    const stages = [...section.querySelectorAll(".connection-stages li")];
+    const stageList = section.querySelector(".connection-stages");
+    const status = section.querySelector(".connection-status");
+    stageList.hidden = false;
+    button.disabled = true;
+    status.className = "connection-status";
+    stages.forEach((stage) => {
+      stage.classList.remove("is-running","is-complete");
+      stage.querySelector("em").textContent = "대기";
+    });
+    for (let index = 0; index < stages.length; index += 1) {
+      const stage = stages[index];
+      stage.classList.add("is-running");
+      stage.querySelector("em").textContent = "진행 중";
+      status.textContent = `${stage.querySelector("strong").textContent} 단계를 실행하고 있습니다.`;
+      await new Promise((resolve) => setTimeout(resolve, 260));
+      stage.classList.remove("is-running");
+      stage.classList.add("is-complete");
+      stage.querySelector("em").textContent = "완료";
+    }
+    status.className = "connection-status is-success";
+    status.textContent = item.live ? "연결 구조 확인 완료. 아래에서 공식 MCP를 실제 호출할 수 있습니다." : "교육용 연결 구조 시연이 완료되었습니다.";
+    button.disabled = false;
+    button.textContent = "다시 보기";
   });
 
   const form = section.querySelector(".live-lab form");

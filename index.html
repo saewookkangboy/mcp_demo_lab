@@ -1,3 +1,59 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MCP Demo Lab</title><link rel="stylesheet" href="/shared/ui/styles.css"></head>
-<body><main><p class="eyebrow">MCP Demo Lab</p><h1>도구 연결을 눈으로 배우는 5개 실습</h1><p class="lead">기본 데모는 가상 데이터와 mock으로 안전하게 시작합니다. 각 데모에서 실제 오픈소스 MCP 확장 경로를 확인하고, 대화형 검색에서는 공식 외부 MCP를 직접 호출할 수 있습니다.</p><section class="grid" id="projects"></section></main>
-<script>const items=[['01-instructor-meeting-notes','강사 시연','회의록 작성','Filesystem MCP'],['02-instructor-quote','강사 시연','견적서 작성','Git MCP'],['03-beginner-blueprint','초급','설계도 제작','Playwright MCP'],['04-intermediate-conversational-search','중급','대화형 검색','LIVE · 공식 Docs MCP'],['05-advanced-memory','고급','데이터 기반 메모리','Memory MCP']];document.querySelector('#projects').innerHTML=items.map(([path,level,title,oss],i)=>`<a class="card" href="/projects/${path}/" style="color:inherit;text-decoration:none"><span class="tag">${level}</span>${oss.startsWith('LIVE')?'<span class="tag live-tag">LIVE</span>':''}<h2>${i+1}. ${title}</h2><span class="harness-mini">Harness 적용/미적용 비교</span><span class="oss-mini">OSS 확장 · ${oss}</span><p>데모 열기 →</p></a>`).join('')</script></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MCP Demo Lab</title>
+  <link rel="stylesheet" href="/shared/ui/styles.css">
+</head>
+<body class="lab-home">
+  <main class="home-main">
+    <section class="home-hero">
+      <div>
+        <p class="eyebrow">MCP Demo Lab</p>
+        <h1>5개의 MCP 시연을<br>하나의 화면에서</h1>
+        <p class="lead">명령어 입력 없이 데모 선택, Harness 비교, MCP 호출 관찰, 화면 검증까지 브라우저에서 진행합니다.</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="/presentation.html">전체 시연 시작</a>
+          <a class="secondary-action" href="#projects">개별 데모 선택</a>
+        </div>
+      </div>
+      <aside class="home-preview" aria-label="전체 시연 화면 안내">
+        <span class="preview-label">강의용 시연 모드</span>
+        <strong>한 창에서 이어서 진행</strong>
+        <ol>
+          <li>데모와 난이도 선택</li>
+          <li>기본 입력을 화면에서 실행</li>
+          <li>MCP 요청과 응답을 단계별 확인</li>
+          <li>Harness 전후 결과 비교</li>
+        </ol>
+      </aside>
+    </section>
+    <section class="project-section" id="projects">
+      <div class="section-heading">
+        <h2>개별 데모</h2>
+        <p>원하는 프로젝트만 별도 화면에서 열 수도 있습니다.</p>
+      </div>
+      <div class="grid project-grid" id="project-list"></div>
+    </section>
+  </main>
+  <script>
+    const items = [
+      ['01-instructor-meeting-notes','강사 시연','회의록 작성','Filesystem MCP'],
+      ['02-instructor-quote','강사 시연','견적서 작성','Git MCP'],
+      ['03-beginner-blueprint','초급','설계도 제작','Playwright MCP'],
+      ['04-intermediate-conversational-search','중급','대화형 검색','공식 Docs MCP'],
+      ['05-advanced-memory','고급','데이터 기반 메모리','Memory MCP']
+    ];
+    document.querySelector('#project-list').innerHTML = items.map(([path,level,title,oss],i) => `
+      <a class="card project-card" href="/projects/${path}/">
+        <span class="project-number">${String(i+1).padStart(2,'0')}</span>
+        <span class="tag">${level}</span>
+        <h3>${title}</h3>
+        <span class="harness-mini">Harness 적용 전후 비교</span>
+        <span class="oss-mini">${oss}</span>
+        <span class="card-action">데모 열기</span>
+      </a>`).join('');
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>전체 시연 | MCP Demo Lab</title>
+  <link rel="stylesheet" href="/shared/ui/styles.css">
+</head>
+<body class="presentation-page">
+  <div class="presentation-shell">
+    <header class="studio-bar">
+      <div class="studio-brand"><a href="/" aria-label="MCP Demo Lab 홈">MCP Demo Lab</a><span>전체 시연</span></div>
+      <div class="studio-progress" aria-live="polite"><span id="progress-text">1 / 5</span><div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div></div>
+      <button type="button" id="global-harness" class="studio-switch is-on" role="switch" aria-checked="true"><span class="switch-track"><span></span></span><strong>Harness 적용</strong></button>
+    </header>
+    <aside class="demo-sidebar" aria-label="데모 목록">
+      <div class="sidebar-heading"><strong>시연 순서</strong><span>클릭해서 이동</span></div>
+      <nav id="demo-nav"></nav>
+      <section class="presenter-note" aria-live="polite"><span>진행 포인트</span><strong id="note-title"></strong><ol id="note-list"></ol></section>
+    </aside>
+    <main class="demo-stage">
+      <div class="stage-loading" id="stage-loading" aria-live="polite"><strong>데모 화면을 준비하고 있습니다.</strong><span>입력과 MCP 관찰 패널을 불러옵니다.</span></div>
+      <iframe id="demo-frame" title="MCP 데모 실행 화면"></iframe>
+    </main>
+    <footer class="studio-controls">
+      <button type="button" class="secondary-control" id="previous-demo">이전 데모</button>
+      <div class="run-controls"><span id="studio-status" role="status">기본 입력으로 바로 시연할 수 있습니다.</span><button type="button" class="secondary-control" id="run-demo">기본 입력 실행</button><button type="button" class="primary-control" id="verify-demo">화면 검증</button></div>
+      <button type="button" class="secondary-control" id="next-demo">다음 데모</button>
+    </footer>
+  </div>
+  <script type="module" src="/shared/ui/presentation-studio.js"></script>
+</body>
+</html>
