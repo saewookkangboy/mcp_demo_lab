@@ -1,0 +1,5 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>이벤트 메모리 MCP</title><link rel="stylesheet" href="/shared/ui/styles.css"></head><body><main><p class="eyebrow">고급</p><h1>사건을 쌓고 최신 상태를 기억하는 Agent</h1><p class="lead">여러 시점의 데이터를 저장하고 충돌을 해결한 뒤, 최신 기억과 원본 타임라인을 함께 보여줍니다.</p><form class="panel"><label>기억할 대상</label><input name="subject" value="프로젝트 알파"><label>사건 데이터(JSON 배열)</label><textarea name="events" style="min-height:260px">[
+  {"subject":"프로젝트 알파","field":"상태","value":"기획 중","at":"2026-08-20T09:00:00+09:00","source":"회의-001"},
+  {"subject":"프로젝트 알파","field":"담당자","value":"민지","at":"2026-08-21T10:00:00+09:00","source":"업무-014"},
+  {"subject":"프로젝트 알파","field":"상태","value":"개발 중","at":"2026-08-25T14:00:00+09:00","source":"업무-021"}
+]</textarea><button>기억 저장 후 조회</button></form><section id="result" class="result" hidden></section></main><script type="module" src="./main.js"></script></body></html>

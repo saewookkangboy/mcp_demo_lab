@@ -1,0 +1,5 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>견적서 MCP</title><link rel="stylesheet" href="/shared/ui/styles.css"></head>
+<body><main><p class="eyebrow">강사 시연</p><h1>입력 두 개로 즉시 견적 계산</h1><p class="lead">정해진 가격표를 MCP 도구가 조회했다고 가정하고 세금과 합계를 FE에 출력합니다.</p>
+<form class="panel"><label>서비스</label><select name="service"><option>웹사이트 진단</option><option>콘텐츠 제작</option><option>AI 워크숍</option></select><label>수량</label><input name="quantity" type="number" min="0" value="2"><button>견적 계산</button></form>
+<section id="result" class="result" hidden></section></main><script type="module" src="./main.js"></script></body></html>

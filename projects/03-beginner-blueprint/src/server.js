@@ -1,0 +1,6 @@
+import { createMockMcpServer } from "../../../shared/mcp/mock-mcp-server.js";
+
+export function createBlueprintServer(){return createMockMcpServer({name:"blueprint-mcp",tools:[{
+  name:"generate_floor_plan",description:"방 크기와 용도를 바탕으로 간단한 SVG 평면도를 만듭니다.",inputSchema:{type:"object",properties:{width:{type:"number"},height:{type:"number"},purpose:{type:"string"}},required:["width","height","purpose"]},required:["width","height","purpose"],
+  run:({width,height,purpose})=>{width=Number(width);height=Number(height);if(!Number.isFinite(width)||!Number.isFinite(height)||width<2||height<2)throw new Error("가로와 세로는 2m 이상이어야 합니다.");const area=width*height;const deskCount=purpose==="교육장"?Math.max(4,Math.floor(area/4)):Math.max(1,Math.floor(area/8));return{purpose,width,height,area,scale:"1m = 50px",deskCount,svg:`<svg viewBox="0 0 ${width*50+20} ${height*50+20}" role="img" aria-label="${purpose} 평면도"><rect x="10" y="10" width="${width*50}" height="${height*50}" rx="4" fill="#eef3ff" stroke="#315efb" stroke-width="4"/><rect x="${width*25-25}" y="10" width="50" height="8" fill="#10b981"/><text x="20" y="35" font-size="14" fill="#14213d">${purpose} · ${area}㎡</text><text x="20" y="58" font-size="12" fill="#64748b">권장 좌석 ${deskCount}개</text></svg>`,warnings:area<20?["공간이 작아 동선을 별도로 검토하세요."]:[]};}
+}]})}

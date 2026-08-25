@@ -1,0 +1,5 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>설계도 MCP</title><link rel="stylesheet" href="/shared/ui/styles.css"></head>
+<body><main><p class="eyebrow">초급</p><h1>숫자 입력을 시각 설계도로 변환</h1><p class="lead">가로·세로·용도를 MCP 도구에 전달하고, 반환된 SVG와 계산값을 한 화면에 표시합니다.</p>
+<form class="panel"><label>가로(m)</label><input name="width" type="number" min="1" value="8"><label>세로(m)</label><input name="height" type="number" min="1" value="6"><label>용도</label><select name="purpose"><option>교육장</option><option>회의실</option><option>스튜디오</option></select><button>설계도 만들기</button></form>
+<section id="result" class="result" hidden></section></main><script type="module" src="./main.js"></script></body></html>

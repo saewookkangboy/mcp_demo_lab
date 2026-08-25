@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "filesystem-demo": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./samples/oss-inputs"]
+    },
+    "memory-demo": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "git-demo": {
+      "command": "uvx",
+      "args": ["mcp-server-git", "--repository", "."]
+    },
+    "playwright-demo": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    },
+    "official-mcp-docs": {
+      "type": "http",
+      "url": "https://modelcontextprotocol.io/mcp"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+import test from"node:test";import assert from"node:assert/strict";import{createMemorySession}from"../main.js";
+const event=(value,at,source="test")=>({subject:"프로젝트 알파",field:"상태",value,at,source});
+test("학습자 관점: 시간순 사건 중 가장 최신 상태를 기억한다",async()=>{const s=await createMemorySession();await s.remember([event("기획 중","2026-08-20T09:00:00Z"),event("개발 중","2026-08-25T09:00:00Z")]);const r=await s.recall("프로젝트 알파");assert.equal(r.memories[0].value,"개발 중");assert.equal(r.evidenceCount,2)});
+test("충돌 관점: 늦게 도착한 과거 사건이 최신 기억을 덮지 않는다",async()=>{const s=await createMemorySession();await s.remember([event("완료","2026-08-25T09:00:00Z")]);const result=await s.remember([event("기획 중","2026-08-20T09:00:00Z")]);assert.equal(result.accepted,0);assert.equal((await s.recall("프로젝트 알파")).memories[0].value,"완료")});
+test("추적성 관점: 최신 기억에는 시간과 출처가 남는다",async()=>{const s=await createMemorySession();await s.remember([event("검토 중","2026-08-25T09:00:00Z","업무-123")]);const memory=(await s.recall("프로젝트 알파")).memories[0];assert.equal(memory.source,"업무-123");assert.ok(memory.at)});
+test("격리 관점: 새 세션은 다른 세션의 기억을 공유하지 않는다",async()=>{const a=await createMemorySession();const b=await createMemorySession();await a.remember([event("완료","2026-08-25T09:00:00Z")]);assert.equal((await b.recall("프로젝트 알파")).memories.length,0)});
+test("계약 관점: 세 가지 MCP 도구가 공개된다",async()=>{const s=await createMemorySession();assert.deepEqual((await s.listTools()).map(x=>x.name),["remember_events","recall_memory","inspect_timeline"])});
